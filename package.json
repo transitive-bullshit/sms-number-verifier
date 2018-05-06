@@ -1,0 +1,51 @@
+{
+  "name": "sms-number-verifier",
+  "version": "0.0.1",
+  "description": "Allows you to spoof SMS number verification.",
+  "main": "index.js",
+  "repository": "transitive-bullshit/sms-number-verifier",
+  "author": "Travis Fischer <travis@automagical.ai>",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava -v && standard"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "verify",
+    "verification",
+    "confirmation",
+    "activation",
+    "authentication",
+    "auth",
+    "code",
+    "pin",
+    "otp",
+    "login",
+    "security",
+    "number",
+    "phone",
+    "phone number",
+    "sms",
+    "2fac",
+    "2factor",
+    "2-fac",
+    "2-factor",
+    "2-step"
+  ],
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "standard": "^11.0.0",
+    "validator": "^10.1.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "p-memoize": "^1.0.0",
+    "parse-otp-message": "^1.0.0",
+    "parsetime": "^0.2.9",
+    "random-item": "^1.0.0",
+    "request": "^2.85.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
