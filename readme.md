@@ -36,7 +36,9 @@ const codes = await request.getAuthCodes('google')
 // codes = [ '584125' ]
 ```
 
-Note: there may be multiple auth codes returned since the SMS numbers being used are publicly shared. We filter the results down to only those codes that could possibly be associated with your request, and most of the time you will only receive one code back. In the case of multiple codes, we recommend you try the codes in-order (the most recently received code will be first).
+**Note**: there may be multiple auth codes returned since the SMS numbers being used are publicly shared. We filter the results down to only those codes that could possibly be associated with your request, and most of the time you will only receive one code back. In the case of multiple codes, we recommend you try the codes in-order (the most recently received code will be first).
+
+**Note**: there may be variable amounts of latency between giving your number to the service and the SMS code being received. If no valid codes are returned, it is recommended that you retry `request.getAuthCodes` with an exponential timeout falloff.
 
 
 ## API
