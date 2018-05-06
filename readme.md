@@ -101,6 +101,8 @@ Service examples: `'google'`, `'microsoft'`, `'wechat'`, etc.
 
 - [ ] support country selection
 - [ ] support more providers
+  - [ ] [trash mobile](https://www.spoofbox.com/en/tool/trash-mobile)
+  - [ ] (misc)(https://drfone.wondershare.com/message/receive-message-online.html)
 - [ ] support twilio provider
 
 
