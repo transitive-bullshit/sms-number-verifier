@@ -1,6 +1,6 @@
 {
   "name": "sms-number-verifier",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Allows you to spoof SMS number verification.",
   "main": "index.js",
   "repository": "transitive-bullshit/sms-number-verifier",
