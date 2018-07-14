@@ -6,6 +6,7 @@
   "repository": "transitive-bullshit/sms-number-verifier",
   "author": "Travis Fischer <travis@automagical.ai>",
   "license": "MIT",
+  "reveal": true,
   "scripts": {
     "test": "ava -v && standard"
   },
