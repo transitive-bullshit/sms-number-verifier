@@ -39,14 +39,20 @@ class SMSNumberVerifier {
   async getNumber (opts = { }) {
     ow(opts, ow.object.plain.label('opts'))
 
-    let numbers = await this._provider.getNumbers(opts)
+    const {
+      blacklist,
+      whitelist,
+      ...rest
+    } = opts
 
-    if (opts.blacklist) {
-      numbers = numbers.filter((number) => !opts.blacklist.has(number))
+    let numbers = await this._provider.getNumbers(rest)
+
+    if (blacklist) {
+      numbers = numbers.filter((number) => !blacklist.has(number))
     }
 
-    if (opts.whitelist) {
-      numbers = numbers.filter((number) => opts.whitelist.has(number))
+    if (whitelist) {
+      numbers = numbers.filter((number) => whitelist.has(number))
     }
 
     return randomItem(numbers)
@@ -74,7 +80,7 @@ class SMSNumberVerifier {
 
       const results = messages
         .filter((m) => m.service === service)
-        .filter((m) => !timestamp || m.timestamp > timestamp)
+        .filter((m) => !timestamp || m.timestamp >= timestamp)
         .map((m) => m.code)
 
       if (!results.length) {
