@@ -22,17 +22,18 @@ npm install --save sms-number-verifier
 ## Usage
 
 ```js
-const smsNumberVerifier = require('sms-number-verifier')
+const SMSNumberVerifier = require('sms-number-verifier')
 
-// create a new verification request
-const request = await smsNumberVerifier()
-// request.number = '18383000677'
+const smsVerifier = new SMSNumberVerifier('plivo')
+
+// fetch a number to use for a new verification request
+const number = await smsVerifier.getNumber()
 
 // give request.number to third-party service such as google...
 // third-party service sends SMS code to the given number
 
 // check for valid codes received via SMS from the google service
-const codes = await request.getAuthCodes('google')
+const codes = await request.getAuthCodes({ service: 'google' })
 // codes = [ '584125' ]
 ```
 
@@ -43,69 +44,26 @@ const codes = await request.getAuthCodes('google')
 
 ## API
 
-### smsNumberVerifier(opts)
-
-Returns: `Promise<VerificationRequest>`
-
-Starts a new verification request, returning a phone number to use and metadata for the request.
-
-#### opts
-
-Type: `Object`
-
-#### opts.provider
-
-Type: `String`
-
-Optionally specify a preferred provider.
-
-#### opts.blacklist
-
-Type: `Set<String>`
-
-Optional number blacklist.
-
-#### opts.whitelist
-
-Type: `Set<String>`
-
-Optional number whitelist.
-
-### VerificationRequest
-
-Type: `Object`
-
-Represents a single SMS verification request.
-
-#### VerificationRequest.number
-
-Type: `String`
-
-Phone Number to use for this request.
-
-#### VerificationRequest.timestamp
-
-Type: `Date`
-
-Time at which this verification request was initialized. This is used to filter the list of potential auth codes to only those received after the verification request started.
-
-#### VerificationRequest.getAuthCodes
-
-Type: `function(service: String)`
-Returns: `Promise<Array<String>>`
-
-Function to get possible auth codes associated with the number in this request and a specified `service`.
-
-Service examples: `'google'`, `'microsoft'`, `'wechat'`, etc.
-
+**TODO**
 
 ## Todo
 
 - [ ] support country selection
 - [ ] support more providers
-  - [ ] [trash mobile](https://www.spoofbox.com/en/tool/trash-mobile)
-  - [ ] [misc](https://drfone.wondershare.com/message/receive-message-online.html)
-- [ ] support twilio provider
+  - paid
+    - [ ] https://sms-verification.net
+    - [ ] https://receive-sms.com
+    - [ ] twilio
+    - [ ] [plivo](https://plivo.com)
+    - [ ] [nexmo](https://www.nexmo.com/pricing)
+  - anonymous / free
+    - [ ] https://freephonenum.com/us
+    - [ ] https://receive-smss.com/
+    - [ ] https://sms-online.co/receive-free-sms
+    - [ ] [trash mobile](https://www.spoofbox.com/en/tool/trash-mobile)
+    - [ ] [misc](https://drfone.wondershare.com/message/receive-message-online.html)
+  - [aggregate](https://www.reddit.com/r/privacytoolsIO/comments/8bz1j6/receive_anonymous_sms_online_without_giving_away/)
+- how can you tell if a number has been banned?
 
 
 ## Related
