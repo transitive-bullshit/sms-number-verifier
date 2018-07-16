@@ -1,6 +1,7 @@
 'use strict'
 
 const ow = require('ow')
+const phoneNumberInfo = require('phone-number-information')
 const pRetry = require('p-retry')
 const pTimeout = require('p-timeout')
 const randomItem = require('random-item')
@@ -94,6 +95,10 @@ class SMSNumberVerifier {
       maxTimeout: timeout,
       ...rest
     }), timeout)
+  }
+
+  getNumberInfo (number) {
+    return phoneNumberInfo.numberToInformation(number)
   }
 }
 

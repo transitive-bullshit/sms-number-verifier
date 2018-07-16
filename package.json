@@ -8,6 +8,7 @@
   "license": "MIT",
   "reveal": true,
   "scripts": {
+    "docs": "update-markdown-jsdoc --no-markdown-toc",
     "test": "ava -v && standard"
   },
   "engines": {
@@ -38,6 +39,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "standard": "^11.0.0",
+    "update-markdown-jsdoc": "^1.0.6",
     "validator": "^10.1.0"
   },
   "dependencies": {
@@ -54,6 +56,7 @@
     "p-timeout": "^2.0.1",
     "parse-otp-message": "^1.0.0",
     "parsetime": "^0.2.9",
+    "phone-number-information": "^2.0.1",
     "pify": "^3.0.0",
     "plivo": "^4.0.1",
     "random-item": "^1.0.0",
