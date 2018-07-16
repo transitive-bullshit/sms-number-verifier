@@ -43,6 +43,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "co-body": "^6.0.0",
+    "getsmscode": "^1.0.2",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
     "ngrok": "^3.0.1",

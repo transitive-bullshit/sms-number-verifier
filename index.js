@@ -68,6 +68,7 @@ class SMSNumberVerifier {
       timestamp = this._timestamp,
       number,
       service,
+      pid,
       ...rest
     } = opts
 
@@ -76,7 +77,7 @@ class SMSNumberVerifier {
     ow(opts, ow.object.plain.nonEmpty.label('opts'))
 
     return pTimeout(pRetry(async () => {
-      const messages = await this._provider.getMessages({ number, service })
+      const messages = await this._provider.getMessages({ number, service, pid })
 
       const results = messages
         .filter((m) => m.service === service)

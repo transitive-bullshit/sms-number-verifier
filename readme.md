@@ -2,7 +2,7 @@
 
 > Allows you to spoof SMS number verification.
 
-[![NPM](https://img.shields.io/npm/v/sms-number-verifier.svg)](https://www.npmjs.com/package/sms-number-verifier) [![Build Status](https://travis-ci.org/transitive-bullshit/sms-number-verifier.svg?branch=master)](https://travis-ci.org/transitive-bullshit/sms-number-verifier) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/sms-number-verifier.svg)](https://www.npmjs.com/package/sms-number-verifier) [![Build Status](https://travis-ci.com/transitive-bullshit/sms-number-verifier.svg?branch=master)](https://travis-ci.com/transitive-bullshit/sms-number-verifier) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 - meant for automated systems that need to bypass SMS number verification
 - handles hundreds of known services (wechat, google, facebook, whatsapp, uber, twitter, etc...)
@@ -24,10 +24,13 @@ npm install --save sms-number-verifier
 ```js
 const SMSNumberVerifier = require('sms-number-verifier')
 
-const smsVerifier = new SMSNumberVerifier('plivo')
+const smsVerifier = new SMSNumberVerifier('getsmscode', {
+  username: '...',
+  token: '...'
+})
 
 // fetch a number to use for a new verification request
-const number = await smsVerifier.getNumber()
+const number = await smsVerifier.getNumber({ service: 'google' })
 
 // give request.number to third-party service such as google...
 // third-party service sends SMS code to the given number
@@ -41,6 +44,18 @@ const codes = await request.getAuthCodes({ service: 'google' })
 
 **Note**: there may be variable amounts of latency between giving your number to the service and the SMS code being received. If no valid codes are returned, it is recommended that you retry `request.getAuthCodes` with an exponential timeout.
 
+## Providers
+
+The following providers provide free, virtual numbers:
+  - [smsreceivefree](https://smsreceivefree.com/)
+
+The following providers provide paid, virtual numbers:
+  - [plivo](https://www.plivo.com/)
+
+The following providers provide paid, physical numbers:
+  - [getsmscode](http://www.getsmscode.com/)
+
+We highly recommend that you use the [getsmscode](http://www.getsmscode.com/) provider, as virtual numbers (VOIP) are rejected by many popular OTP services, such as Microsoft and Google.
 
 ## API
 
@@ -69,7 +84,7 @@ const codes = await request.getAuthCodes({ service: 'google' })
 ## Related
 
 - [parse-otp-message](https://github.com/transitive-bullshit/parse-otp-message) - Parses OTP messages for a verification code and service provider.
-- [smsprivacy](https://smsprivacy.org/) - Allows you to sign up for anonymous SMS numbers via bitcoin.
+- [getsmscode](https://github.com/transitive-bullshit/getsmscode) - API client for [getsmscode.com](http://www.getsmscode.com/).
 
 
 ## Disclaimer
