@@ -2,7 +2,6 @@
 
 const ow = require('ow')
 const pRetry = require('p-retry')
-const pTimeout = require('p-timeout')
 const randomItem = require('random-item')
 const PhoneNumber = require('awesome-phonenumber')
 
@@ -65,11 +64,11 @@ class SMSNumberVerifier {
   async getAuthCodes (opts) {
     const {
       retries = 3,
-      timeout = 30000,
+      minTimeout = 5000,
+      maxTimeout = 30000,
       timestamp = this._timestamp,
       number,
       service,
-      pid,
       ...rest
     } = opts
 
@@ -77,24 +76,24 @@ class SMSNumberVerifier {
     ow(service, ow.string.nonEmpty.label('service'))
     ow(opts, ow.object.plain.nonEmpty.label('opts'))
 
-    return pTimeout(pRetry(async () => {
-      const messages = await this._provider.getMessages({ number, service, pid })
+    return pRetry(async () => {
+      const messages = await this._provider.getMessages({ number, service, ...rest })
 
-      const results = messages
+      const results = (messages || [])
         .filter((m) => m.service === service)
         .filter((m) => !timestamp || m.timestamp >= timestamp)
         .map((m) => m.code)
 
       if (!results.length) {
-        throw new Error(`waiting for SMS message for service \`${service}\` at number \`${number}\`)`)
+        throw new Error(`waiting for SMS message for service \`${service}\` at number \`${number}\``)
       }
 
       return results
     }, {
       retries,
-      maxTimeout: timeout,
-      ...rest
-    }), timeout)
+      minTimeout,
+      maxTimeout
+    })
   }
 
   /**
@@ -104,6 +103,8 @@ class SMSNumberVerifier {
    * @return {object}
    */
   getNumberInfo (number) {
+    number = number.trim()
+
     if (!number.startsWith('+')) {
       number = `+${number}`
     }
