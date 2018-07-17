@@ -76,8 +76,9 @@ class SMSNumberVerifier {
     ow(service, ow.string.nonEmpty.label('service'))
     ow(opts, ow.object.plain.nonEmpty.label('opts'))
 
+    let attempt = 0
     return pRetry(async () => {
-      const messages = await this._provider.getMessages({ number, service, ...rest })
+      const messages = await this._provider.getMessages({ number, service, ...rest, attempt })
 
       const results = (messages || [])
         .filter((m) => m.service === service)
@@ -85,6 +86,7 @@ class SMSNumberVerifier {
         .map((m) => m.code)
 
       if (!results.length) {
+        ++attempt
         throw new Error(`waiting for SMS message for service \`${service}\` at number \`${number}\``)
       }
 

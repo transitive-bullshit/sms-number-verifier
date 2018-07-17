@@ -46,6 +46,7 @@
     "awesome-phonenumber": "^2.2.6",
     "cheerio": "^1.0.0-rc.2",
     "co-body": "^6.0.0",
+    "delay": "^3.0.0",
     "getsmscode": "^1.0.2",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
