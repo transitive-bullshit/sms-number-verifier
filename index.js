@@ -65,7 +65,7 @@ class SMSNumberVerifier {
     const {
       retries = 3,
       minTimeout = 5000,
-      maxTimeout = 30000,
+      maxTimeout = 20000,
       timestamp = this._timestamp,
       number,
       service,
