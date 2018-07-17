@@ -1,10 +1,10 @@
 'use strict'
 
 const ow = require('ow')
-const phoneNumberInfo = require('phone-number-information')
 const pRetry = require('p-retry')
 const pTimeout = require('p-timeout')
 const randomItem = require('random-item')
+const PhoneNumber = require('awesome-phonenumber')
 
 const OTPProvider = require('./lib/otp-provider')
 const providers = require('./lib/providers')
@@ -97,8 +97,18 @@ class SMSNumberVerifier {
     }), timeout)
   }
 
+  /**
+   * Parses the given number using google's libphonenumber.
+   *
+   * @param {string} number - Phone number to parse
+   * @return {object}
+   */
   getNumberInfo (number) {
-    return phoneNumberInfo.numberToInformation(number)
+    if (!number.startsWith('+')) {
+      number = `+${number}`
+    }
+
+    return new PhoneNumber(number)
   }
 }
 
