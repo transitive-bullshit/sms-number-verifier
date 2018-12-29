@@ -30,11 +30,11 @@ const smsVerifier = new SMSNumberVerifier('getsmscode', {
 // fetch a number to use for a new verification request
 const number = await smsVerifier.getNumber({ service: 'google' })
 
-// give request.number to third-party service such as google...
+// give number to third-party service such as google...
 // third-party service sends SMS code to the given number
 
 // check for valid codes received via SMS from the google service
-const codes = await request.getAuthCodes({ service: 'google' })
+const codes = await smsVerifier.getAuthCodes({ number, service: 'google' })
 // codes = [ '584125' ]
 ```
 
@@ -94,7 +94,7 @@ Type: `function (opts)`
 
 Type: `function (opts)`
 
--   `opts`  
+-   `opts`
 
 ## Todo
 
