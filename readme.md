@@ -127,3 +127,5 @@ Using this software to violate the terms and conditions of any third-party servi
 ## License
 
 MIT © [Travis Fischer](https://github.com/transitive-bullshit)
+
+Support my OSS work by <a href="https://twitter.com/transitive_bs">following me on twitter <img src="https://storage.googleapis.com/saasify-assets/twitter-logo.svg" alt="twitter" height="24px" align="center"></a>
